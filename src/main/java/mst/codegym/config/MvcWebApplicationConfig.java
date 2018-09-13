@@ -17,7 +17,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 
 @Configuration
-@ComponentScan("mst.codegym.controller")
+@ComponentScan("mst.codegym")
 @EnableWebMvc
 public class MvcWebApplicationConfig implements ApplicationContextAware {
 
