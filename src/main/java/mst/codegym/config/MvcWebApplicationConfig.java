@@ -21,8 +21,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebMvc
 public class MvcWebApplicationConfig implements ApplicationContextAware {
 
+    private ApplicationContext applicationContext;
+
     @Bean
-    public SpringResourceTemplateResolver templateResolver(){
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
@@ -32,7 +34,7 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public TemplateEngine templateEngine(){
+    public TemplateEngine templateEngine() {
         TemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.addDialect(new SpringSecurityDialect());
@@ -40,12 +42,11 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public ViewResolver viewResolver(){
+    public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
-    private ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
