@@ -1,0 +1,108 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define pk(x) <u>x</u>
+!define fk(x) <i><u>x</u></i>
+hide methods
+hide stereotypes
+skinparam shadowing false
+
+table(User) {
+  pk(id)
+  username
+  password
+}
+
+table(Group) {
+  pk(id)
+  name
+  descriptions
+}
+
+table(Profile) {
+  pk(id)
+  fk(userId)
+  email
+  firstName
+  midName
+  lastName
+  address
+  phone
+}
+
+table(Test) {
+  pk(id)
+  name
+  descriptions
+}
+
+table(TestQuestion) {
+  pk(id)
+  fk(testId)
+  content
+  descriptions
+  hint
+  weight
+  orderRelevance
+}
+
+table(TestQuestionOption) {
+  pk(id)
+  fk(testQuestionId)
+  order
+  content
+  descriptions
+  isRight
+}
+
+table(Category) {
+  pk(id)
+  name
+  descriptions
+}
+
+table(Assignment) {
+  pk(id)
+  fk(testId)
+  fk(groupId)
+  descriptions
+  startTime
+  endTime
+}
+
+table(UserAssignment) {
+  pk(id)
+  fk(assignmentId)
+  fk(userId)
+  startTime
+  finishTime
+}
+
+table(UserAssignmentAnswer) {
+  pk(id)
+  fk(testQuestionId)
+}
+
+table(UserAssignmentAnswerCheck) {
+  pk(id)
+  fk(userAssignmentAnswer)
+  fk(testQuestionOption)
+}
+
+note right of TestQuestion: weight = trọng số (1, 2, 3, 5, 8)
+note top of TestQuestion: orderRelevance = có để ý đến order của option hay không
+
+User <|--|> Profile
+User }--{ Group
+Test <|--{ TestQuestion
+TestQuestion <|--{ TestQuestionOption
+TestQuestion }--{ Category
+Test <|--{ Assignment
+Group <|--{ Assignment
+User }--{ UserAssignment
+Assignment <|--{ UserAssignment
+UserAssignment <|--{ UserAssignmentAnswer
+TestQuestion <|--{ UserAssignmentAnswer
+UserAssignmentAnswer <|--{ UserAssignmentAnswerCheck
+TestQuestionOption <|--{ UserAssignmentAnswerCheck
+
+@enduml
