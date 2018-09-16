@@ -117,6 +117,8 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
         return transactionManager;
     }
 
+    // Business Beans ↓
+
     @Bean
     public TestQuestionService testQuestionService() {
         return new TestQuestionServiceImpl();
