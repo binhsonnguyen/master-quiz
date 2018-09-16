@@ -24,6 +24,21 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Bean
+    public ViewResolver viewResolver() {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+        return viewResolver;
+    }
+
+    @Bean
+    public TemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addDialect(new SpringSecurityDialect());
+        return templateEngine;
+    }
+
+    @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
@@ -31,21 +46,6 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         return templateResolver;
-    }
-
-    @Bean
-    public TemplateEngine templateEngine() {
-        TemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.addDialect(new SpringSecurityDialect());
-        return templateEngine;
-    }
-
-    @Bean
-    public ViewResolver viewResolver() {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        return viewResolver;
     }
 
     @Override
