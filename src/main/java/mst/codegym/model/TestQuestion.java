@@ -20,7 +20,8 @@ public class TestQuestion {
 
     private String hint;
 
-    private int weight;
+    @Convert(converter = TestQuestionWeightAttrConverter.class)
+    private TestQuestionWeight weight;
 
     private boolean orderRelevance;
 
@@ -59,11 +60,11 @@ public class TestQuestion {
         this.hint = hint;
     }
 
-    public int getWeight() {
+    public TestQuestionWeight getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(TestQuestionWeight weight) {
         this.weight = weight;
     }
 
@@ -111,7 +112,7 @@ public class TestQuestion {
         result = 31 * result + content.hashCode();
         result = 31 * result + (descriptions != null ? descriptions.hashCode() : 0);
         result = 31 * result + (hint != null ? hint.hashCode() : 0);
-        result = 31 * result + weight;
+        result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (orderRelevance ? 1 : 0);
         return result;
     }
