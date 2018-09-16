@@ -1,5 +1,7 @@
 package mst.codegym.config;
 
+import mst.codegym.service.TestQuestionService;
+import mst.codegym.service.impl.TestQuestionServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -51,5 +53,10 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    public TestQuestionService testQuestionService() {
+        return new TestQuestionServiceImpl();
     }
 }
