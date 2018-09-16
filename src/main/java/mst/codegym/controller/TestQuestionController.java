@@ -4,10 +4,7 @@ import mst.codegym.model.TestQuestion;
 import mst.codegym.service.TestQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -28,6 +25,13 @@ public class TestQuestionController {
     @PostMapping
     public ModelAndView createQuizQuestion(@ModelAttribute("question") TestQuestion question) {
         testQuestionService.save(question);
+        String redirectURL = String.format("redirect:/question/details/%d", question.getId());
+        return new ModelAndView(redirectURL);
+    }
+
+    @GetMapping("details/{id}")
+    public ModelAndView viewTestQuestionDetails(@PathVariable long id) {
+        TestQuestion question = testQuestionService.find(id);
         ModelAndView modelAndView = new ModelAndView("question/details");
         modelAndView.addObject("questioning", question);
         return modelAndView;
