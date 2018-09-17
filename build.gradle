@@ -14,6 +14,12 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'xml-apis:xml-apis:1.4.01'
+    }
+}
+
 dependencies {
     // Spring's core
     compile group: 'org.springframework', name: 'spring-core', version: '4.3.18.RELEASE'
@@ -26,6 +32,7 @@ dependencies {
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
 
     // JAXB
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.8'
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.8'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.8'
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.8'
