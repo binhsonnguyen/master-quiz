@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Details</title>
+</head>
+<body>
+<h2>Quiz Details</h2>
+<th:block th:object="${questioning}">
+    <table>
+        <tr>
+            <th>Id:</th>
+            <td>
+                <p th:text="*{id}"></p>
+            </td>
+        </tr>
+        <tr>
+            <th>Content:</th>
+            <td>
+                <p th:text="*{content}"></p>
+            </td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>
+                <p th:text="*{descriptions}"></p>
+                <p><i>(<span th:text="*{hint}"></span>)</i></p>
+            </td>
+        </tr>
+        <tr>
+            <th>Weight:</th>
+            <td>
+                Not setted
+            </td>
+        </tr>
+        <tr>
+            <th>Order Relevance:</th>
+            <td>
+                Not setted
+            </td>
+        </tr>
+    </table>
+</th:block>
+</body>
+</html>

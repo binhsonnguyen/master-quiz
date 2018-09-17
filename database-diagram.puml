@@ -8,7 +8,7 @@ skinparam shadowing false
 
 table(User) {
   pk(id)
-  email
+  email <i>@NotNull</i>
   firstName
   midName
   lastName
@@ -18,27 +18,27 @@ table(User) {
 
 table(Group) {
   pk(id)
-  name
+  name <i>@NotNull</i>
   descriptions
 }
 
 table(UserNameAndPasswordCredential) {
   pk(id)
   fk(userId)
-  username
-  password
+  username <i>@NotNull</i>
+  password <i>@NotNull</i>
 }
 
 table(Test) {
   pk(id)
-  name
+  name <i>@NotNull</i>
   descriptions
 }
 
 table(TestQuestion) {
   pk(id)
   fk(testId)
-  content
+  content <i>@NotNull</i>
   descriptions
   hint
   weight
@@ -49,14 +49,14 @@ table(TestQuestionOption) {
   pk(id)
   fk(testQuestionId)
   order
-  content
+  content <i>@NotNull</i>
   descriptions
   isRight
 }
 
 table(Category) {
   pk(id)
-  name
+  name <i>@NotNull</i>
   descriptions
 }
 
@@ -64,6 +64,7 @@ table(Assignment) {
   pk(id)
   fk(testId)
   fk(groupId)
+  name <i>@NotNull</i>
   descriptions
   startTime
   endTime
@@ -88,7 +89,7 @@ table(UserAssignmentAnswerCheck) {
   fk(testQuestionOption)
 }
 
-note right of TestQuestion: weight = trọng số (1, 2, 3, 5, 8)
+note right of TestQuestion: weight = trọng số (1, 2, 3, 4)
 note top of TestQuestion: orderRelevance = có để ý đến order của option hay không
 
 User }--{ Group

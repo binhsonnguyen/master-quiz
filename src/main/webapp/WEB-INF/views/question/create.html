@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+</head>
+<body>
+<h2>Create a Quiz</h2>
+<form method="post" th:object="${question}">
+    <table>
+        <tr>
+            <th>Content:</th>
+            <td>
+                <textarea th:field="*{content}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>
+                <textarea th:field="*{descriptions}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>Hint:</th>
+            <td>
+                <textarea th:field="*{hint}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>Weight:</th>
+            <td>
+                <!--TODO weight radio-->
+            </td>
+        </tr>
+        <tr>
+            <th>Order Relevance:</th>
+            <td>
+                <!--TODO order relevance checkbox-->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Create Question"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
