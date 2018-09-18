@@ -3,11 +3,15 @@ package mst.codegym.config;
 import mst.codegym.service.TestQuestionService;
 import mst.codegym.service.impl.TestQuestionServiceImpl;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -21,9 +25,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,9 +41,28 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan("mst.codegym")
 @Configuration
+@PropertySource("classpath:/application.properties")
 public class MvcWebApplicationConfig implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private Environment environment;
+
+    @Value("${datasource.driver-class-name}")
+    private String dsDriverClassName;
+
+    @Value("${datasource.url}")
+    private String dsUrl;
+
+    @Value("${datasource.username}")
+    private String dsUsername;
+
+    @Value("${datasource.password}")
+    private String dsPassword;
+
+    @Value("${jpa.hibernate.ddl-auto}")
+    private String jpaHibernateDdlAuto;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -63,10 +87,9 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
+    public ITemplateResolver templateResolver() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         return templateResolver;
@@ -94,17 +117,16 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/master_quiz");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setDriverClassName(dsDriverClassName);
+        dataSource.setUrl(dsUrl);
+        dataSource.setUsername(dsUsername);
+        dataSource.setPassword(dsPassword);
         return dataSource;
     }
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("jpa.hibernate.ddl-auto", jpaHibernateDdlAuto);
         return properties;
     }
 

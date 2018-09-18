@@ -1,7 +1,7 @@
 package mst.codegym.model;
 
 public enum TestQuestionWeight {
-    EASY(1), MEDIUM(2), HARD(3), INSANE(4);
+    NONE(0), EASY(1), MEDIUM(2), HARD(3), INSANE(4);
 
     private int value;
 
@@ -11,6 +11,8 @@ public enum TestQuestionWeight {
 
     public static TestQuestionWeight fromValue(int value) {
         switch (value) {
+            case 0:
+                return NONE;
             case 1:
                 return EASY;
             case 2:
