@@ -25,9 +25,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -86,10 +87,9 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views/");
+    public ITemplateResolver templateResolver() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         return templateResolver;
