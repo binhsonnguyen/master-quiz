@@ -18,6 +18,9 @@ dependencies {
     // Spring's core
     compile group: 'org.springframework', name: 'spring-core', version: '4.3.18.RELEASE'
 
+    // Lombok's Buider Pattern
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+
     // MVC
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.18.RELEASE'
