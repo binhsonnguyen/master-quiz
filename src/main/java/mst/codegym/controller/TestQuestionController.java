@@ -1,5 +1,6 @@
 package mst.codegym.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import mst.codegym.model.TestQuestion;
 import mst.codegym.service.TestQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/question")
+@Slf4j
 public class TestQuestionController {
     @Autowired
     private TestQuestionService testQuestionService;
@@ -16,8 +18,9 @@ public class TestQuestionController {
     @GetMapping
     public ModelAndView accessCreateQuizQuestionPage() {
         ModelAndView modelAndView = new ModelAndView("question/create");
-        TestQuestion question = new TestQuestion();
-        question.setContent("a sample content");
+        TestQuestion question = TestQuestion.builder()
+                .content("a sample content")
+                .build();
         modelAndView.addObject("question", question);
         return modelAndView;
     }
