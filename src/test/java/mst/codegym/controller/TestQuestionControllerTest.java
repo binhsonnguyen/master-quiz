@@ -1,7 +1,6 @@
 package mst.codegym.controller;
 
 import mst.codegym.model.TestQuestion;
-import mst.codegym.model.TestQuestionWeight;
 import mst.codegym.service.TestQuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,6 +59,7 @@ public class TestQuestionControllerTest {
                 .param("descriptions", "a sample description")
                 .param("hint", "a sample description")
         )
-                .andExpect(status().isFound());
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrlPattern("/question/details/*"));
     }
 }
