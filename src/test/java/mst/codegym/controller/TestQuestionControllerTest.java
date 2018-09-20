@@ -47,16 +47,16 @@ class TestQuestionControllerTest {
 
     @InjectMocks
     private TestQuestionController testQuestionController;
+
     @Autowired
     private TestQuestionService testQuestionService;
+
     private MockMvc mockMvc;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mockMvc = MockMvcBuilders.standaloneSetup(testQuestionController)
-                .build();
+        mockMvc = MockMvcBuilders.standaloneSetup(testQuestionController).build();
     }
 
     @Test
