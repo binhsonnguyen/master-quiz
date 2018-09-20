@@ -61,8 +61,11 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     @Value("${datasource.password}")
     private String dsPassword;
 
-    @Value("${jpa.hibernate.ddl-auto}")
-    private String jpaHibernateDdlAuto;
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hbDdlAuto;
+
+    @Value("${hibernate.dialect}")
+    private String hbDialect;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -124,9 +127,10 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
         return dataSource;
     }
 
-    private Properties additionalProperties() {
+    Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("jpa.hibernate.ddl-auto", jpaHibernateDdlAuto);
+        properties.setProperty("hibernate.hbm2ddl.auto", hbDdlAuto);
+        properties.setProperty("hibernate.dialect", hbDialect);
         return properties;
     }
 
