@@ -19,7 +19,6 @@ public class TestQuestion {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "testId")
     private Test test;
 
     @Column(nullable = false)
