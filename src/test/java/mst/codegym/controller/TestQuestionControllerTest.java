@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -61,5 +62,22 @@ public class TestQuestionControllerTest {
         )
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern("/question/details/*"));
+    }
+
+    @Test
+    public void testAccessTestQuestionDetailsPage() throws Exception {
+        TestQuestion question = TestQuestion.builder()
+                .id(1)
+                .content("a sample content")
+                .descriptions("a sample description")
+                .hint("a sample description")
+                .build();
+
+        when(testQuestionService.find(1)).thenReturn(question);
+
+        mockMvc.perform(get("/question/details/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("question/details"))
+                .andExpect(model().attribute("question", question));
     }
 }

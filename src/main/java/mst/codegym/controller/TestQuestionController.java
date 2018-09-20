@@ -35,7 +35,7 @@ public class TestQuestionController {
     public ModelAndView viewTestQuestionDetails(@PathVariable long id) {
         TestQuestion question = testQuestionService.find(id);
         ModelAndView modelAndView = new ModelAndView("question/details");
-        modelAndView.addObject("questioning", question);
+        modelAndView.addObject("question", question);
         return modelAndView;
     }
 
