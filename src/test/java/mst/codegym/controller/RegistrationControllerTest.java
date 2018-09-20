@@ -29,7 +29,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void testRedirectAfterRegistered() throws Exception {
+    void testAccessAccountRegistrationPage() throws Exception {
         mockMvc.perform(get("/register"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("account/register"))
