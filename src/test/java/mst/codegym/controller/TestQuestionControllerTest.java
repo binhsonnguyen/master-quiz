@@ -22,13 +22,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebAppConfiguration
 @SpringJUnitJupiterConfig(TestQuestionControllerTestConfig.class)
-public class TestQuestionControllerTest {
+class TestQuestionControllerTest {
+    private static long sampleId;
+    private static String sampleContent;
+    private static String sampleDescriptions;
+    private static String sampleHint;
+    private static TestQuestion emptyQuestion;
+    private static TestQuestion sampleQuestion;
+
+    static {
+        sampleId = 1;
+        sampleContent = "Sample Content";
+        sampleDescriptions = "Sample Descriptions";
+        sampleHint = "Sample Hint";
+        emptyQuestion = TestQuestion.builder()
+                .build();
+        sampleQuestion = TestQuestion.builder()
+                .id(sampleId)
+                .content(sampleContent)
+                .descriptions(sampleDescriptions)
+                .hint(sampleHint)
+                .build();
+    }
+
     @InjectMocks
     private TestQuestionController testQuestionController;
-
     @Autowired
     private TestQuestionService testQuestionService;
-
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -40,44 +60,34 @@ public class TestQuestionControllerTest {
     }
 
     @Test
-    public void testAccessCreateTestQuestionPage() throws Exception {
-        TestQuestion question = TestQuestion.builder()
-                .build();
-
+    void testAccessCreateTestQuestionPage() throws Exception {
         mockMvc.perform(get("/question"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("question/create"))
-                .andExpect(model().attribute("question", question));
+                .andExpect(model().attribute("question", emptyQuestion));
     }
 
     @Test
-    public void testCreateTestQuestion() throws Exception {
+    void testCreateTestQuestion() throws Exception {
         doNothing().when(testQuestionService).save(isA(TestQuestion.class));
 
         mockMvc.perform(post("/question")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("content", "a sample content")
-                .param("descriptions", "a sample description")
-                .param("hint", "a sample description")
+                .param("content", sampleContent)
+                .param("descriptions", sampleDescriptions)
+                .param("hint", sampleHint)
         )
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern("/question/details/*"));
     }
 
     @Test
-    public void testAccessTestQuestionDetailsPage() throws Exception {
-        TestQuestion question = TestQuestion.builder()
-                .id(1)
-                .content("a sample content")
-                .descriptions("a sample description")
-                .hint("a sample description")
-                .build();
+    void testAccessTestQuestionDetailsPage() throws Exception {
+        when(testQuestionService.find(sampleId)).thenReturn(sampleQuestion);
 
-        when(testQuestionService.find(1)).thenReturn(question);
-
-        mockMvc.perform(get("/question/details/1"))
+        mockMvc.perform(get("/question/details/" + sampleId))
                 .andExpect(status().isOk())
                 .andExpect(view().name("question/details"))
-                .andExpect(model().attribute("question", question));
+                .andExpect(model().attribute("question", sampleQuestion));
     }
 }

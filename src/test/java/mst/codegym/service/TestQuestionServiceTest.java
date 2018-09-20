@@ -13,7 +13,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitJupiterConfig(TestQuestionServiceTestConfig.class)
-public class TestQuestionServiceTest {
+class TestQuestionServiceTest {
+    private static long sampleId;
+    private static TestQuestion sampleQuestion;
+
+    static {
+        sampleId = 1;
+        sampleQuestion = TestQuestion.builder()
+                .id(sampleId)
+                .content("Sample Content")
+                .descriptions("Sample Descriptions")
+                .hint("Sample Hint")
+                .build();
+    }
+
     @Autowired
     private TestQuestionService testQuestionService;
 
@@ -21,21 +34,14 @@ public class TestQuestionServiceTest {
     private TestQuestionRepository testQuestionRepository;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testFindTestQuestionById() {
-        TestQuestion question = TestQuestion.builder()
-                .id(1)
-                .content("a sample content")
-                .descriptions("a sample description")
-                .hint("a sample description")
-                .build();
-
-        when(testQuestionRepository.findOne((long) 1)).thenReturn(question);
-        assertEquals(question, testQuestionService.find(1));
-        verify(testQuestionRepository).findOne((long) 1);
+    void testFindTestQuestionById() {
+        when(testQuestionRepository.findOne(sampleId)).thenReturn(sampleQuestion);
+        assertEquals(sampleQuestion, testQuestionService.find(1));
+        verify(testQuestionRepository).findOne(sampleId);
     }
 }
