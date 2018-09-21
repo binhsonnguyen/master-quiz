@@ -1,3 +1,9 @@
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:8.0.11'
+    }
+}
+
 plugins {
     id 'java'
     id 'war'
@@ -37,7 +43,7 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.0.Final'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.0.Final'
     compile group: 'org.springframework', name: 'spring-orm', version: SPRING_VERSION
-    
+
     // Security
     compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.8.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.8.RELEASE'
@@ -64,7 +70,11 @@ dependencies {
     compile group: 'org.flywaydb', name: 'flyway-core', version: '5.1.4'
 }
 
-test{
+flyway {
+    configFiles = ['flyway.conf']
+}
+
+test {
 
     useJUnitPlatform()
 
