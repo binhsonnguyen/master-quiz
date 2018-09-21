@@ -61,9 +61,6 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
     @Value("${datasource.password}")
     private String dsPassword;
 
-    @Value("${hibernate.hbm2ddl.auto}")
-    private String hbDdlAuto;
-
     @Value("${hibernate.dialect}")
     private String hbDialect;
 
@@ -129,7 +126,6 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
 
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", hbDdlAuto);
         properties.setProperty("hibernate.dialect", hbDialect);
         return properties;
     }
