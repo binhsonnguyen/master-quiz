@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class MarkdownProcessorDialect implements IProcessorDialect {
     private static final String DIALECT_NAME = "markdown";
+    private static final String ATTR_VALUE_NAME = "value";
 
     @Override
     public int getDialectProcessorPrecedence() {
@@ -31,7 +32,7 @@ public class MarkdownProcessorDialect implements IProcessorDialect {
         StandardMarkDownElementTagProcessor processor =
                 new StandardMarkDownElementTagProcessor(TemplateMode.HTML,
                         getPrefix(),
-                        getName(),
+                        ATTR_VALUE_NAME,
                         getDialectProcessorPrecedence()
                 );
         return Collections.singleton(processor);
