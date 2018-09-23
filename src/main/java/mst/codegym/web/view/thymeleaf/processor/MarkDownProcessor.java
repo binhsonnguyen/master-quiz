@@ -38,9 +38,7 @@ public class MarkDownProcessor extends AbstractStandardExpressionAttributeTagPro
         final IModelFactory modelFactory = context.getModelFactory();
         final String template = render(expressionResult);
         IModel model = modelFactory.parse(context.getTemplateData(), template);
-        structureHandler.removeTags();
-        structureHandler.insertImmediatelyAfter(model, false);
-
+        structureHandler.replaceWith(model, false);
     }
 
     private String render(Object expression) {
