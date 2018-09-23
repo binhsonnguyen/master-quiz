@@ -1,4 +1,4 @@
-package mst.codegym.web.thymeleaf.dialect.standard;
+package mst.codegym.web.view.thymeleaf.processor;
 
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -12,15 +12,15 @@ import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-public class StandardMarkDownElementTagProcessor extends AbstractStandardExpressionAttributeTagProcessor {
+public class MarkDownProcessor extends AbstractStandardExpressionAttributeTagProcessor {
 
     private static final Parser PARSER = Parser.builder().build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
-    public StandardMarkDownElementTagProcessor(TemplateMode templateMode,
-                                               String dialectPrefix,
-                                               String attributeName,
-                                               int precedence) {
+    public MarkDownProcessor(TemplateMode templateMode,
+                             String dialectPrefix,
+                             String attributeName,
+                             int precedence) {
         super(templateMode,
                 dialectPrefix,
                 attributeName,
