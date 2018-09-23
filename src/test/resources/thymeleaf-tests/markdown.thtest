@@ -1,0 +1,13 @@
+%TEMPLATE_MODE HTML
+# ------------------------------------------------------------
+%CONTEXT
+italic1 = '*itatlic*'
+italic2 = '_itatlic_'
+# ------------------------------------------------------------
+%INPUT
+<th:markdown th:value="${italic1}"/>
+<th:markdown th:value="${italic2}"/>
+# ------------------------------------------------------------
+%OUTPUT
+<p><em>itatlic</em></p>
+<p><em>itatlic</em></p>
