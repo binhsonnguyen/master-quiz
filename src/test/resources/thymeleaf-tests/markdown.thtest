@@ -1,0 +1,42 @@
+%TEMPLATE_MODE HTML
+# ------------------------------------------------------------
+%CONTEXT
+italic1 = '*itatlic text*'
+italic2 = '_itatlic text_'
+bold1='**bold text**'
+bold2='__bold text__'
+code1='`code statements;`'
+code2='`code statements;`'
+# ------------------------------------------------------------
+%INPUT
+<th:markdown th:value="${italic1}"/>
+<th:markdown th:value="${italic2}"/>
+<th:markdown th:value="${italic1}"></th:markdown>
+<th:markdown th:value="${italic2}"></th:markdown>
+
+<th:markdown th:value="${bold1}"/>
+<th:markdown th:value="${bold2}"/>
+<th:markdown th:value="${bold1}"></th:markdown>
+<th:markdown th:value="${bold2}"></th:markdown>
+
+<th:markdown th:value="${code1}"/>
+<th:markdown th:value="${code2}"/>
+<th:markdown th:value="${code1}"></th:markdown>
+<th:markdown th:value="${code2}"></th:markdown>
+
+# ------------------------------------------------------------
+%OUTPUT
+<p><em>itatlic text</em></p>
+<p><em>itatlic text</em></p>
+<p><em>itatlic text</em></p>
+<p><em>itatlic text</em></p>
+
+<p><strong>bold text</strong></p>
+<p><strong>bold text</strong></p>
+<p><strong>bold text</strong></p>
+<p><strong>bold text</strong></p>
+
+<p><code>code statements;</code></p>
+<p><code>code statements;</code></p>
+<p><code>code statements;</code></p>
+<p><code>code statements;</code></p>

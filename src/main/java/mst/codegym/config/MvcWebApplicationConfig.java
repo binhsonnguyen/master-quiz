@@ -2,7 +2,7 @@ package mst.codegym.config;
 
 import mst.codegym.service.TestQuestionService;
 import mst.codegym.service.impl.TestQuestionServiceImpl;
-import mst.codegym.web.thymeleaf.dialect.standard.MarkdownProcessorDialect;
+import mst.codegym.web.view.thymeleaf.dialect.MarkdownDialect;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -87,7 +87,7 @@ public class MvcWebApplicationConfig implements ApplicationContextAware {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.addDialect(new SpringSecurityDialect());
-        templateEngine.addDialect(new MarkdownProcessorDialect());
+        templateEngine.addDialect(new MarkdownDialect());
         return templateEngine;
     }
 
