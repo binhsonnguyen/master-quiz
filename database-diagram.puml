@@ -29,15 +29,15 @@ table(UserNameAndPasswordCredential) {
   password <i>@NotNull</i>
 }
 
-table(Test) {
+table(Quiz) {
   pk(id)
   name <i>@NotNull</i>
   descriptions
 }
 
-table(TestQuestion) {
+table(Question) {
   pk(id)
-  fk(testId)
+  fk(quizId)
   content <i>@NotNull</i>
   descriptions
   hint
@@ -45,9 +45,9 @@ table(TestQuestion) {
   orderRelevance
 }
 
-table(TestQuestionOption) {
+table(QuestionOption) {
   pk(id)
-  fk(testQuestionId)
+  fk(questionId)
   order
   content <i>@NotNull</i>
   descriptions
@@ -62,7 +62,7 @@ table(Category) {
 
 table(Assignment) {
   pk(id)
-  fk(testId)
+  fk(quizId)
   fk(groupId)
   name <i>@NotNull</i>
   descriptions
@@ -80,30 +80,32 @@ table(UserAssignment) {
 
 table(UserAssignmentAnswer) {
   pk(id)
-  fk(testQuestionId)
+  fk(questionId)
 }
 
 table(UserAssignmentAnswerCheck) {
   pk(id)
   fk(userAssignmentAnswer)
-  fk(testQuestionOption)
+  fk(questionOption)
 }
 
-note right of TestQuestion: weight = trọng số (1, 2, 3, 4)
-note top of TestQuestion: orderRelevance = có để ý đến order của option hay không
+note right of Question: weight = trọng số (1, 2, 3, 4)
+note top of Question: orderRelevance = có để ý đến order của option hay không
 
 User }--{ Group
 User <|--|> UserNameAndPasswordCredential
-Test <|--{ TestQuestion
-TestQuestion <|--{ TestQuestionOption
-TestQuestion }--{ Category
-Test <|--{ Assignment
+Quiz <|--{ Question
+Question <|--{ QuestionOption
+Question }--{ Category
+Quiz <|--{ Assignment
 Group <|--{ Assignment
 User }--{ UserAssignment
 Assignment <|--{ UserAssignment
 UserAssignment <|--{ UserAssignmentAnswer
-TestQuestion <|--{ UserAssignmentAnswer
+Question <|--{ UserAssignmentAnswer
 UserAssignmentAnswer <|--{ UserAssignmentAnswerCheck
-TestQuestionOption <|--{ UserAssignmentAnswerCheck
+QuestionOption <|--{ UserAssignmentAnswerCheck
+
+right footer v0.0.5
 
 @enduml
