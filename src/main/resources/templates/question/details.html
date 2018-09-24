@@ -6,6 +6,7 @@
 </head>
 <body>
 <h2>Quiz Details</h2>
+<!--/*@thymesVar id="question" type="mst.codegym.model.TestQuestion"*/-->
 <th:block th:object="${question}">
     <table>
         <tr>
@@ -17,7 +18,7 @@
         <tr>
             <th>Content:</th>
             <td>
-                <p th:text="*{content}"></p>
+                <th:markdown th:value="*{content}"/>
             </td>
         </tr>
         <tr>

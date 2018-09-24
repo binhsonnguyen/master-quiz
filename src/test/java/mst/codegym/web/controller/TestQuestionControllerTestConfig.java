@@ -1,4 +1,4 @@
-package mst.codegym.controller;
+package mst.codegym.web.controller;
 
 import mst.codegym.service.TestQuestionService;
 import mst.codegym.service.impl.TestQuestionServiceImpl;

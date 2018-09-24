@@ -1,4 +1,4 @@
-package mst.codegym.controller;
+package mst.codegym.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import mst.codegym.model.TestQuestion;
