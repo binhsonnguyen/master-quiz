@@ -1,6 +1,6 @@
 package mst.codegym.web.controller;
 
-import mst.codegym.model.TestQuestion;
+import mst.codegym.model.Question;
 import mst.codegym.service.TestQuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,17 +27,17 @@ class TestQuestionControllerTest {
     private static String sampleContent;
     private static String sampleDescriptions;
     private static String sampleHint;
-    private static TestQuestion emptyQuestion;
-    private static TestQuestion sampleQuestion;
+    private static Question emptyQuestion;
+    private static Question sampleQuestion;
 
     static {
         sampleId = 1;
         sampleContent = "Sample Content";
         sampleDescriptions = "Sample Descriptions";
         sampleHint = "Sample Hint";
-        emptyQuestion = TestQuestion.builder()
+        emptyQuestion = Question.builder()
                 .build();
-        sampleQuestion = TestQuestion.builder()
+        sampleQuestion = Question.builder()
                 .id(sampleId)
                 .content(sampleContent)
                 .descriptions(sampleDescriptions)
@@ -69,7 +69,7 @@ class TestQuestionControllerTest {
 
     @Test
     void testCreateTestQuestion() throws Exception {
-        doNothing().when(testQuestionService).save(isA(TestQuestion.class));
+        doNothing().when(testQuestionService).save(isA(Question.class));
 
         mockMvc.perform(post("/question")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)

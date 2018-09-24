@@ -1,7 +1,7 @@
 package mst.codegym.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import mst.codegym.model.TestQuestion;
+import mst.codegym.model.Question;
 import mst.codegym.service.TestQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +18,14 @@ public class TestQuestionController {
     @GetMapping
     public ModelAndView accessCreateQuizQuestionPage() {
         ModelAndView modelAndView = new ModelAndView("question/create");
-        TestQuestion question = TestQuestion.builder()
+        Question question = Question.builder()
                 .build();
         modelAndView.addObject("question", question);
         return modelAndView;
     }
 
     @PostMapping
-    public ModelAndView createQuizQuestion(@ModelAttribute("question") TestQuestion question) {
+    public ModelAndView createQuizQuestion(@ModelAttribute("question") Question question) {
         testQuestionService.save(question);
         String redirectURL = String.format("redirect:/question/details/%d", question.getId());
         return new ModelAndView(redirectURL);
@@ -33,7 +33,7 @@ public class TestQuestionController {
 
     @GetMapping("details/{id}")
     public ModelAndView viewTestQuestionDetails(@PathVariable long id) {
-        TestQuestion question = testQuestionService.find(id);
+        Question question = testQuestionService.find(id);
         ModelAndView modelAndView = new ModelAndView("question/details");
         modelAndView.addObject("question", question);
         return modelAndView;

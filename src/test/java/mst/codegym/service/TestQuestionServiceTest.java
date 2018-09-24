@@ -1,6 +1,6 @@
 package mst.codegym.service;
 
-import mst.codegym.model.TestQuestion;
+import mst.codegym.model.Question;
 import mst.codegym.repository.TestQuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,11 @@ import static org.mockito.Mockito.when;
 @SpringJUnitJupiterConfig(TestQuestionServiceTestConfig.class)
 class TestQuestionServiceTest {
     private static long sampleId;
-    private static TestQuestion sampleQuestion;
+    private static Question sampleQuestion;
 
     static {
         sampleId = 1;
-        sampleQuestion = TestQuestion.builder()
+        sampleQuestion = Question.builder()
                 .id(sampleId)
                 .content("Sample Content")
                 .descriptions("Sample Descriptions")

@@ -1,6 +1,6 @@
 package mst.codegym.service;
 
-import mst.codegym.model.TestQuestion;
+import mst.codegym.model.Question;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 @Service
 public interface TestQuestionService {
     @Transactional
-    TestQuestion find(long id);
+    Question find(long id);
 
     @Transactional
-    void save(TestQuestion question);
+    void save(Question question);
 }
