@@ -19,7 +19,7 @@ public class TestQuestion {
     private long id;
 
     @ManyToOne
-    private Test test;
+    private Quiz quiz;
 
     @Column(nullable = false)
     private String content;
