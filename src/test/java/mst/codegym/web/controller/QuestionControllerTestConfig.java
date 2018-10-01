@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("mst.codegym")
-public class TestQuestionControllerTestConfig {
+public class QuestionControllerTestConfig {
     @Bean
     public TestQuestionService testQuestionService() {
         return Mockito.mock(TestQuestionServiceImpl.class);

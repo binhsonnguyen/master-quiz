@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebAppConfiguration
-@SpringJUnitJupiterConfig(TestQuestionControllerTestConfig.class)
-class TestQuestionControllerTest {
+@SpringJUnitJupiterConfig(QuestionControllerTestConfig.class)
+class QuestionControllerTest {
     private static long sampleId;
     private static String sampleContent;
     private static String sampleDescriptions;
@@ -46,7 +46,7 @@ class TestQuestionControllerTest {
     }
 
     @InjectMocks
-    private TestQuestionController testQuestionController;
+    private QuestionController questionController;
 
     @Autowired
     private TestQuestionService testQuestionService;
@@ -56,7 +56,7 @@ class TestQuestionControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(testQuestionController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(questionController).build();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package mst.codegym.controller;
+package mst.codegym.web.controller;
 
 import mst.codegym.viewModel.account.Register;
 import org.junit.jupiter.api.BeforeEach;

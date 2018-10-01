@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/question")
 @Slf4j
-public class TestQuestionController {
+public class QuestionController {
     @Autowired
     private TestQuestionService testQuestionService;
 
