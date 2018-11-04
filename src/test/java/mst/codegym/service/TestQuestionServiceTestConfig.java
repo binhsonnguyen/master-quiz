@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TestQuestionServiceTestConfig {
-    @Bean
-    public TestQuestionService testQuestionService() {
-        return new TestQuestionServiceImpl();
-    }
+  @Bean
+  public TestQuestionService testQuestionService() {
+    return new TestQuestionServiceImpl();
+  }
 
-    @Bean
-    public TestQuestionRepository testQuestionRepository() {
-        return Mockito.mock(TestQuestionRepository.class);
-    }
+  @Bean
+  public TestQuestionRepository testQuestionRepository() {
+    return Mockito.mock(TestQuestionRepository.class);
+  }
 }

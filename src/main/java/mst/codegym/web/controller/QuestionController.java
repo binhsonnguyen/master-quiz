@@ -8,35 +8,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
+
 @Controller
 @RequestMapping("/question")
 @Slf4j
 public class QuestionController {
-    @Autowired
-    private TestQuestionService testQuestionService;
+  @Autowired
+  private TestQuestionService testQuestionService;
 
-    @GetMapping
-    public ModelAndView accessCreateQuizQuestionPage() {
-        ModelAndView modelAndView = new ModelAndView("question/create");
-        Question question = Question.builder()
-                .build();
-        modelAndView.addObject("question", question);
-        return modelAndView;
-    }
+  @PostConstruct
+  public void iAmAlive() {
+    System.out.println("hello");
+  }
 
-    @PostMapping
-    public ModelAndView createQuizQuestion(@ModelAttribute("question") Question question) {
-        testQuestionService.save(question);
-        String redirectURL = String.format("redirect:/question/details/%d", question.getId());
-        return new ModelAndView(redirectURL);
-    }
+  @GetMapping
+  public ModelAndView accessCreateQuizQuestionPage() {
+    ModelAndView modelAndView = new ModelAndView("question/create");
+    Question question = Question.builder()
+        .build();
+    modelAndView.addObject("question", question);
+    return modelAndView;
+  }
 
-    @GetMapping("details/{id}")
-    public ModelAndView viewTestQuestionDetails(@PathVariable long id) {
-        Question question = testQuestionService.find(id);
-        ModelAndView modelAndView = new ModelAndView("question/details");
-        modelAndView.addObject("question", question);
-        return modelAndView;
-    }
+  @PostMapping
+  public ModelAndView createQuizQuestion(@ModelAttribute("question") Question question) {
+    testQuestionService.save(question);
+    String redirectURL = String.format("redirect:/question/details/%d", question.getId());
+    return new ModelAndView(redirectURL);
+  }
+
+  @GetMapping("details/{id}")
+  public ModelAndView viewTestQuestionDetails(@PathVariable long id) {
+    Question question = testQuestionService.find(id);
+    ModelAndView modelAndView = new ModelAndView("question/details");
+    modelAndView.addObject("question", question);
+    return modelAndView;
+  }
+
+  @GetMapping("details")
+  public ModelAndView viewTestQuestionDetails(Question question) {
+    ModelAndView modelAndView = new ModelAndView("question/details");
+    modelAndView.addObject("question", question);
+    return modelAndView;
+  }
 
 }

@@ -7,9 +7,9 @@ import javax.transaction.Transactional;
 
 @Service
 public interface TestQuestionService {
-    @Transactional
-    Question find(long id);
+  @Transactional
+  Question find(long id);
 
-    @Transactional
-    void save(Question question);
+  @Transactional
+  void save(Question question);
 }

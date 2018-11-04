@@ -45,106 +45,106 @@ import java.util.Properties;
 @PropertySource("classpath:/application.properties")
 public class MvcWebApplicationConfig implements ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
+  private ApplicationContext applicationContext;
 
-    @Autowired
-    private Environment environment;
+  @Autowired
+  private Environment environment;
 
-    @Value("${datasource.driver-class-name}")
-    private String dsDriverClassName;
+  @Value("${datasource.driver-class-name}")
+  private String dsDriverClassName;
 
-    @Value("${datasource.url}")
-    private String dsUrl;
+  @Value("${datasource.url}")
+  private String dsUrl;
 
-    @Value("${datasource.username}")
-    private String dsUsername;
+  @Value("${datasource.username}")
+  private String dsUsername;
 
-    @Value("${datasource.password}")
-    private String dsPassword;
+  @Value("${datasource.password}")
+  private String dsPassword;
 
-    @Value("${hibernate.dialect}")
-    private String hbDialect;
+  @Value("${hibernate.dialect}")
+  private String hbDialect;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
 
-    // Beans that setup Thymeleaf VE ↓
+  // Beans that setup Thymeleaf VE ↓
 
-    @Bean
-    public ViewResolver viewResolver() {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        return viewResolver;
-    }
+  @Bean
+  public ViewResolver viewResolver() {
+    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+    viewResolver.setTemplateEngine(templateEngine());
+    return viewResolver;
+  }
 
-    @Bean
-    public TemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.addDialect(new SpringSecurityDialect());
-        templateEngine.addDialect(new MarkdownDialect());
-        return templateEngine;
-    }
+  @Bean
+  public TemplateEngine templateEngine() {
+    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+    templateEngine.setTemplateResolver(templateResolver());
+    templateEngine.addDialect(new SpringSecurityDialect());
+    templateEngine.addDialect(new MarkdownDialect());
+    return templateEngine;
+  }
 
-    @Bean
-    public ITemplateResolver templateResolver() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setPrefix("/templates/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        return templateResolver;
-    }
+  @Bean
+  public ITemplateResolver templateResolver() {
+    ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+    templateResolver.setPrefix("/templates/");
+    templateResolver.setSuffix(".html");
+    templateResolver.setTemplateMode(TemplateMode.HTML);
+    return templateResolver;
+  }
 
-    // Beans that setup Entity Manager ↓
+  // Beans that setup Entity Manager ↓
 
-    @Bean
-    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-    }
+  @Bean
+  public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+    return entityManagerFactory.createEntityManager();
+  }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[]{"mst.codegym.model"});
+  @Bean
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+    em.setDataSource(dataSource());
+    em.setPackagesToScan(new String[]{"mst.codegym.model"});
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
-        return em;
-    }
+    JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    em.setJpaVendorAdapter(vendorAdapter);
+    em.setJpaProperties(additionalProperties());
+    return em;
+  }
 
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(dsDriverClassName);
-        dataSource.setUrl(dsUrl);
-        dataSource.setUsername(dsUsername);
-        dataSource.setPassword(dsPassword);
-        return dataSource;
-    }
+  @Bean
+  public DataSource dataSource() {
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName(dsDriverClassName);
+    dataSource.setUrl(dsUrl);
+    dataSource.setUsername(dsUsername);
+    dataSource.setPassword(dsPassword);
+    return dataSource;
+  }
 
-    Properties additionalProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", hbDialect);
-        return properties;
-    }
+  Properties additionalProperties() {
+    Properties properties = new Properties();
+    properties.setProperty("hibernate.dialect", hbDialect);
+    return properties;
+  }
 
-    // Setup Platform Transaction Manager ↓
+  // Setup Platform Transaction Manager ↓
 
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
-        return transactionManager;
-    }
+  @Bean
+  public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    JpaTransactionManager transactionManager = new JpaTransactionManager();
+    transactionManager.setEntityManagerFactory(emf);
+    return transactionManager;
+  }
 
-    // Business Beans ↓
+  // Business Beans ↓
 
-    @Bean
-    public TestQuestionService testQuestionService() {
-        return new TestQuestionServiceImpl();
-    }
+  @Bean
+  public TestQuestionService testQuestionService() {
+    return new TestQuestionServiceImpl();
+  }
 }

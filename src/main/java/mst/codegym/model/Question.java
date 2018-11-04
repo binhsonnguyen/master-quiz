@@ -14,22 +14,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @ManyToOne
-    private Quiz quiz;
+  @ManyToOne
+  private Quiz quiz;
 
-    @Column(nullable = false)
-    private String content;
+  @Column(nullable = false)
+  private String content;
 
-    private String descriptions;
+  private String descriptions;
 
-    private String hint;
+  private String hint;
 
-    @Convert(converter = QuestionWeightAttrConverter.class)
-    private QuestionWeight weight;
+  @Convert(converter = QuestionWeightAttrConverter.class)
+  private QuestionWeight weight;
 
-    private boolean orderRelevance;
+  private boolean orderRelevance;
 }

@@ -14,35 +14,35 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 public class MarkDownProcessor extends AbstractStandardExpressionAttributeTagProcessor {
 
-    private static final Parser PARSER = Parser.builder().build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
+  private static final Parser PARSER = Parser.builder().build();
+  private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
-    public MarkDownProcessor(TemplateMode templateMode,
-                             String dialectPrefix,
-                             String attributeName,
-                             int precedence) {
-        super(templateMode,
-                dialectPrefix,
-                attributeName,
-                precedence,
-                false);
-    }
+  public MarkDownProcessor(TemplateMode templateMode,
+                           String dialectPrefix,
+                           String attributeName,
+                           int precedence) {
+    super(templateMode,
+        dialectPrefix,
+        attributeName,
+        precedence,
+        false);
+  }
 
-    @Override
-    protected void doProcess(ITemplateContext context,
-                             IProcessableElementTag tag,
-                             AttributeName attributeName,
-                             String attributeValue,
-                             Object expressionResult,
-                             IElementTagStructureHandler structureHandler) {
-        final IModelFactory modelFactory = context.getModelFactory();
-        final String template = render(expressionResult);
-        IModel model = modelFactory.parse(context.getTemplateData(), template);
-        structureHandler.replaceWith(model, false);
-    }
+  @Override
+  protected void doProcess(ITemplateContext context,
+                           IProcessableElementTag tag,
+                           AttributeName attributeName,
+                           String attributeValue,
+                           Object expressionResult,
+                           IElementTagStructureHandler structureHandler) {
+    final IModelFactory modelFactory = context.getModelFactory();
+    final String template = render(expressionResult);
+    IModel model = modelFactory.parse(context.getTemplateData(), template);
+    structureHandler.replaceWith(model, false);
+  }
 
-    private String render(Object expression) {
-        Node document = PARSER.parse(expression.toString());
-        return RENDERER.render(document);
-    }
+  private String render(Object expression) {
+    Node document = PARSER.parse(expression.toString());
+    return RENDERER.render(document);
+  }
 }

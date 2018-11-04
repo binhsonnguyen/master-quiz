@@ -14,34 +14,34 @@ import static org.mockito.Mockito.when;
 
 @SpringJUnitJupiterConfig(TestQuestionServiceTestConfig.class)
 class TestQuestionServiceTest {
-    private static long sampleId;
-    private static Question sampleQuestion;
+  private static long sampleId;
+  private static Question sampleQuestion;
 
-    static {
-        sampleId = 1;
-        sampleQuestion = Question.builder()
-                .id(sampleId)
-                .content("Sample Content")
-                .descriptions("Sample Descriptions")
-                .hint("Sample Hint")
-                .build();
-    }
+  static {
+    sampleId = 1;
+    sampleQuestion = Question.builder()
+        .id(sampleId)
+        .content("Sample Content")
+        .descriptions("Sample Descriptions")
+        .hint("Sample Hint")
+        .build();
+  }
 
-    @Autowired
-    private TestQuestionService testQuestionService;
+  @Autowired
+  private TestQuestionService testQuestionService;
 
-    @Autowired
-    private TestQuestionRepository testQuestionRepository;
+  @Autowired
+  private TestQuestionRepository testQuestionRepository;
 
-    @BeforeEach
-    void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
+  @BeforeEach
+  void setup() {
+    MockitoAnnotations.initMocks(this);
+  }
 
-    @Test
-    void testFindTestQuestionById() {
-        when(testQuestionRepository.findOne(sampleId)).thenReturn(sampleQuestion);
-        assertEquals(sampleQuestion, testQuestionService.find(1));
-        verify(testQuestionRepository).findOne(sampleId);
-    }
+  @Test
+  void testFindTestQuestionById() {
+    when(testQuestionRepository.findOne(sampleId)).thenReturn(sampleQuestion);
+    assertEquals(sampleQuestion, testQuestionService.find(1));
+    verify(testQuestionRepository).findOne(sampleId);
+  }
 }

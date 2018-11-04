@@ -9,10 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
-    @GetMapping
-    public ModelAndView accessRegisterPage() {
-        ModelAndView modelAndView = new ModelAndView("account/register");
-        modelAndView.addObject("account", Register.builder().build());
-        return modelAndView;
-    }
+  @GetMapping
+  public ModelAndView accessRegisterPage() {
+    ModelAndView modelAndView = new ModelAndView("account/register");
+    modelAndView.addObject("account", Register.builder().build());
+    return modelAndView;
+  }
 }

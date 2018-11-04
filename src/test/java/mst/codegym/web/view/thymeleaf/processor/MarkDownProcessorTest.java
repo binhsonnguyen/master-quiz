@@ -13,13 +13,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MarkDownProcessorTest {
-    @Test
-    void testMarkDownProcessor() {
-        final List<IProcessorDialect> neededDialects =
-                Arrays.asList(new StandardDialect(), new MarkdownDialect());
-        final TestExecutor executor = TestExecutorFactory.createInstance(neededDialects);
-        executor.execute("classpath:thymeleaf-tests/markdown.thtest");
-        assertTrue(executor.isAllOK());
+  @Test
+  void testMarkDownProcessor() {
+    final List<IProcessorDialect> neededDialects =
+        Arrays.asList(new StandardDialect(), new MarkdownDialect());
+    final TestExecutor executor = TestExecutorFactory.createInstance(neededDialects);
+    executor.execute("classpath:thymeleaf-tests/markdown.thtest");
+    assertTrue(executor.isAllOK());
 
-    }
+  }
 }

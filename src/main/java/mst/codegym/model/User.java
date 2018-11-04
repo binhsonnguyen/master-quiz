@@ -14,25 +14,25 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "user",
-            orphanRemoval = true)
-    private UsernamePasswordCredential usernamePasswordCredential;
+  @OneToOne(fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL,
+      mappedBy = "user",
+      orphanRemoval = true)
+  private UsernamePasswordCredential usernamePasswordCredential;
 
-    private String email;
+  private String email;
 
-    private String firstName;
+  private String firstName;
 
-    private String midName;
+  private String midName;
 
-    private String lastName;
+  private String lastName;
 
-    private String address;
+  private String address;
 
-    private String phone;
+  private String phone;
 }

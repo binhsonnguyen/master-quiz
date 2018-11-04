@@ -14,16 +14,16 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("mst.codegym")
 public class QuestionControllerTestConfig {
-    @Bean
-    public TestQuestionService testQuestionService() {
-        return Mockito.mock(TestQuestionServiceImpl.class);
-    }
+  @Bean
+  public TestQuestionService testQuestionService() {
+    return Mockito.mock(TestQuestionServiceImpl.class);
+  }
 
-    @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .setName("master-quiz")
-                .build();
-    }
+  @Bean
+  public DataSource dataSource() {
+    return new EmbeddedDatabaseBuilder()
+        .setType(EmbeddedDatabaseType.H2)
+        .setName("master-quiz")
+        .build();
+  }
 }

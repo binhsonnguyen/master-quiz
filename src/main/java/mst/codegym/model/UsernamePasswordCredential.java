@@ -14,15 +14,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsernamePasswordCredential {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @MapsId
-    private User user;
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @MapsId
+  private User user;
 
-    private String username;
+  private String username;
 
-    private String password;
+  private String password;
 }
