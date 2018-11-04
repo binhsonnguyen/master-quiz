@@ -28,8 +28,8 @@ public class Question {
 
     private String hint;
 
-    @Convert(converter = TestQuestionWeightAttrConverter.class)
-    private TestQuestionWeight weight;
+    @Convert(converter = QuestionWeightAttrConverter.class)
+    private QuestionWeight weight;
 
     private boolean orderRelevance;
 }
