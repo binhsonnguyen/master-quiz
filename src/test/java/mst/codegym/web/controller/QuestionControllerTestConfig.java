@@ -1,7 +1,6 @@
 package mst.codegym.web.controller;
 
 import mst.codegym.service.TestQuestionService;
-import mst.codegym.service.impl.TestQuestionServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +15,7 @@ import javax.sql.DataSource;
 public class QuestionControllerTestConfig {
   @Bean
   public TestQuestionService testQuestionService() {
-    return Mockito.mock(TestQuestionServiceImpl.class);
+    return Mockito.mock(TestQuestionService.class);
   }
 
   @Bean
