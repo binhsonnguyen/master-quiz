@@ -25,13 +25,13 @@ INSERT INTO `User` (email, firstName, midName, lastName, address, phone)
 VALUES ('son@codegym.vn', 'Nguyen', 'Binh', 'Son', 'ham nghi', '0834181288');
 
 INSERT INTO `User` (email, firstName, midName, lastName, address, phone)
-VALUES ('van@codegym.vn', 'Van', NULL , 'Ha', 'ham nghi', '0834181288');
+VALUES ('van@codegym.vn', 'Van', NULL, 'Ha', 'ham nghi', '0834181288');
 
 INSERT INTO `User` (email, firstName, midName, lastName, address, phone)
 VALUES ('kieuanh@codegym.vn', 'Vu', 'Thi', 'Kieu Anh', 'ham nghi', '0834181288');
 
 INSERT INTO `User` (email, firstName, midName, lastName, address, phone)
-VALUES ('hang@codegym.vn', 'Hang', NULL , 'Le', 'Ham Nghi', '0834181288');
+VALUES ('hang@codegym.vn', 'Hang', NULL, 'Le', 'Ham Nghi', '0834181288');
 
 INSERT INTO UsernamePasswordCredential (username, password, user_id)
 VALUES ('sonnb', '123456', 1);
